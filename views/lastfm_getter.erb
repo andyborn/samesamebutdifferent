@@ -1,0 +1,17 @@
+<form action='/' method='get'>
+  <input type='text' name='song_name' placeholder='song title'>
+  <input type='text' name='artist_name' placeholder='artist name'>
+  <button>Search!</button>
+  </form>
+
+  <div>
+    <% @songs_hash.each do |track|%>
+      <%= track['name'] + ': ' + track['artist']['name']%>
+      </br>
+      <% end %>
+  </div>
+
+</div>
+    <%= @deezer['tracks']['data'][0]['title'] %>
+    <%= @deezer['tracks']['data'][0]['link'] %>
+</div>
