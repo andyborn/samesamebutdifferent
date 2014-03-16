@@ -10,7 +10,7 @@ get '/' do
   @artist_name = params[:artist_name].to_s
   
   if params != {}
-    @similar_songs_json = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=#{encodeURIComponent(@artist_name)}&track=#{encodeURIComponent(@song_name)}&limit=10&autocorrect=1&api_key=d3efa10c1b792c94cbe21ae756ae44ae&format=json")
+    @similar_songs_json = similar_songs_grabber(@artist_name, @song_name, 10)
     unless @similar_songs_json['error'] != nil  
       @similar_songs_hash = @similar_songs_json['similartracks']['track']
       deezer_grabber(@similar_songs_hash)
@@ -20,10 +20,14 @@ get '/' do
   erb :lastfm_getter
 end
 
-# method to fetch deezer tracks matching last.fm similartracks titles.  check returned track artist name against last.fm artist name.  
+# methods to fetch last.fm song recommendations and deezer tracks matching last.fm similartracks titles.  check returned track artist name against last.fm artist name.  
 # if they match, return first song that matches.
 
-# need to rewrite so that it doesnt just grab last matching song... somehow break the 'if loop'
+# need to rewrite deezer method so that it doesnt just grab last matching song... somehow break the 'if loop'
+
+def similar_songs_grabber(artist, song, limit)
+  HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&limit=#{limit}&autocorrect=1&api_key=d3efa10c1b792c94cbe21ae756ae44ae&format=json")
+end 
 
 def deezer_grabber(similar_songs_hash)
   similar_songs_hash.each do |similarsong|
