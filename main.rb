@@ -9,13 +9,19 @@ get '/' do
   @song_name = params[:song_name].to_s
   @artist_name = params[:artist_name].to_s
   
+  if params[:deezer_song_url]
+    deezer_song_url = params[:deezer_song_url].to_s
+    deezer_song_info_json = deezer_url_grabber(deezer_song_url)
+    @song_name = deezer_song_info_json['title']
+    @artist_name = deezer_song_info_json['artist']['name']
+  end
+
   if params != {}
     @similar_songs_json = similar_songs_grabber(@artist_name, @song_name, 10)
-
     unless @similar_songs_json['error'] != nil  
       @similar_songs_hash = @similar_songs_json['similartracks']['track']
       unless @similar_songs_hash.is_a?(String)
-        deezer_grabber(@similar_songs_hash)
+        @similar_songs_with_deezer = deezer_grabber(@similar_songs_hash)
       end
     end
   end
@@ -34,17 +40,17 @@ def similar_songs_grabber(artist, song, limit)
 end 
 
 def deezer_grabber(similar_songs_hash)
-
   similar_songs_hash.each do |similarsong|
-    @deezer_json = HTTParty.get("http://api.deezer.com/search/autocomplete?q=#{encodeURIComponent(similarsong['name'])}")
-    @deezer_json['tracks']['data'].each do |deezertrack|
-      if deezertrack['artist']['name'] == similarsong['artist']['name']
-        similarsong[:deezer] = deezertrack
-      end 
-    end
+    deezer_json = HTTParty.get("http://api.deezer.com/search/autocomplete?q=#{encodeURIComponent(similarsong['name'])}")
+    similarsong[:deezer] = deezer_json['tracks']['data'].detect { |deezertrack| deezertrack['artist']['name'] == similarsong['artist']['name'] }
   end
-  return @similar_songs_with_deezer = similar_songs_hash
 end
+
+def deezer_url_grabber(url)
+  # gets track id from end of normal track url and appends to deezer api search url
+  get_url = "http://api.deezer.com/track/" + url[/\d+/]
+  HTTParty.get(get_url)
+end  
 
 
 # methods to format text input variables into URI syntax
