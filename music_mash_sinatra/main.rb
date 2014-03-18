@@ -8,8 +8,11 @@ require 'json'
 get '/' do 
   @song_name = params[:song_name].to_s
   @artist_name = params[:artist_name].to_s
-  
-  if params[:deezer_song_url]
+ 
+  # @test = HTTParty.get("https://api.deezer.com/artist/27?output=json&output=json&access_token=frlKOc0uFh532861bdea8d3JQxSp2Q0532861bdea91bOTn6QIx&version=js-v1.0.0&callback=DZ.request.callbacks.dzcb_005328720204acfa1_316655360")
+  # binding.pry
+  # frlKOc0uFh532861bdea8d3JQxSp2Q0532861bdea91bOTn6QIx
+  if params[:deezer_song_url] != ""
     deezer_song_url = params[:deezer_song_url].to_s
     deezer_song_info_json = deezer_url_grabber(deezer_song_url)
     @song_name = deezer_song_info_json['title']
