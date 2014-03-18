@@ -1,0 +1,35 @@
+<form action='/' method='get'>
+  <input type='text' name='artist_name' placeholder='artist name' value='<%@artist_name%>'>
+  <input type='text' name='song_name' placeholder='song title'>
+  <input type='text' name='deezer_song_url' placeholder='deezer url'>
+  <button>Search!</button>
+  </form>
+<div>
+  <% if @similar_songs_hash %>
+      <%unless @similar_songs_hash.is_a?(String) %>
+        <% @similar_songs_hash.each do |track|%>
+          <%if track['image'] != nil %>
+            <img src="<%= track['image'][0]['#text'] %>" alt="No Pic">
+          <%end%>  
+          <%= track['name'] + ': ' + track['artist']['name']%></br>
+          <% if track[:deezer] != nil%>
+            <a href="<%= track[:deezer]['link']%>">Deezer Link <%=track[:deezer]['link']%></a></br>
+            <audio controls>
+            <source src="<%= track[:deezer]['preview'] %>" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          <%else%>
+            <p>Sorry Deezer link was not found for this song</p>
+          <%end%>
+          </br>
+         <%end%>    
+      <%else%>
+        <p>Sorry, no Last.fm similar track data available for this song</p>
+      <% end %>
+  <% elsif @similar_songs_json && @similar_songs_json['error'] != nil %>
+    <p><%= @similar_songs_json['message'] + '. Please try again!'%></p>
+  <% else %>
+    <p>Please enter an artist and song and click search!</p>    
+    
+  <%end%>
+</div>
