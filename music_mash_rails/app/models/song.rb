@@ -2,8 +2,10 @@ class Song < ActiveRecord::Base
   attr_accessible :artist_name, :song_name, :deezer_url
 
   def get_similar_songs
-    deezer_url_grabber(deezer_url) unless deezer_url.blank?
-      similar_songs_json = similar_songs_grabber(artist_name, song_name, 10)
+    artist_name = self.artist_name
+    song_name = self.song_name
+    
+    similar_songs_json = similar_songs_grabber(artist_name, song_name, 10)
       unless similar_songs_json['error']
         similar_songs_json = similar_songs_json['similartracks']['track']
         similar_songs_json = deezer_grabber(similar_songs_json) unless similar_songs_json.is_a?(String)
@@ -16,6 +18,10 @@ class Song < ActiveRecord::Base
 
   # need to rewrite deezer method so that it doesnt just grab last matching song... somehow break the 'if loop'
 
+  def url_is_invalid?
+    self.deezer_url[/\d+/] == nil
+  end
+
   def similar_songs_grabber(artist, song, limit)
     HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&limit=#{limit}&autocorrect=0&api_key=d3efa10c1b792c94cbe21ae756ae44ae&format=json")
   end 
@@ -27,14 +33,15 @@ class Song < ActiveRecord::Base
     end
   end
 
-  def deezer_url_grabber(url)
+  def deezer_url_grabber
     # gets track id from end of normal track url and appends to deezer api search url
-    get_url = "http://api.deezer.com/track/" + url[/\d+/]
+    get_url = "http://api.deezer.com/track/" + self.deezer_url[/\d+/]
     deezer_song_info_json = HTTParty.get(get_url)
-    song_name = deezer_song_info_json['title']
-    artist_name = deezer_song_info_json['artist']['name']
-    save
-    reload
+    
+    unless deezer_song_info_json == {"error"=>{"type"=>"DataException", "message"=>"no data", "code"=>800}}
+      self.song_name = deezer_song_info_json['title']
+      self.artist_name = deezer_song_info_json['artist']['name']
+    end
   end  
 
 

@@ -31,13 +31,14 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(params[:song])   
+    @song = Song.new(params[:song])  
+    @song.deezer_url_grabber unless (@song.deezer_url.blank? || @song.url_is_invalid?) 
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
         format.json { render json: @song, status: :created, location: @song }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.json { render json: @song.errors, status: :unprocessable_entity }
       end
     end
