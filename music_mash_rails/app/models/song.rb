@@ -18,6 +18,22 @@ class Song < ActiveRecord::Base
 
   # need to rewrite deezer method so that it doesnt just grab last matching song... somehow break the 'if loop'
 
+  def lastfm_params_normalizer
+    unless self.artist_name.blank? || self.artist_name.blank? 
+      artist = self.artist_name
+      song = self.song_name
+      lastfm_return = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=d3efa10c1b792c94cbe21ae756ae44ae&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&format=json")    
+      binding.pry
+      if lastfm_return['error']
+        self.artist_name = "error"
+        self.song_name = "error"
+      else  
+        self.artist_name = lastfm_return['track']['artist']['name']
+        self.song_name = lastfm_return['track']['name']
+      end
+    end  
+  end
+
   def url_is_invalid?
     self.deezer_url[/\d+/] == nil
   end

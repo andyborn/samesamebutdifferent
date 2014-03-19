@@ -31,8 +31,17 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(params[:song])  
-    @song.deezer_url_grabber unless (@song.deezer_url.blank? || @song.url_is_invalid?) 
+    @song = Song.new(params[:song])
+    @song.lastfm_params_normalizer if @song.deezer_url.blank? 
+    binding.pry
+    if @song.artist_name == "error" 
+      render action: "index", notice: "blah" and return
+    end  
+    
+    unless (@song.deezer_url.blank? || @song.url_is_invalid?) 
+      @song.deezer_url_grabber 
+      @song.lastfm_params_normalizer
+    end
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
