@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
 
 
   def self.from_omniauth(auth)
-      puts 
       if user = User.find_by_email(auth.info.email)
         user.provider = auth.provider
+        user.token = auth.credentials.token
         user.uid = auth.uid
         user
       else
@@ -22,8 +22,16 @@ class User < ActiveRecord::Base
           user.uid = auth.uid
           user.email = auth.info.email
           user.password = Devise.friendly_token[0,20]
+          user.token = auth.credentials.token
+          user.name = auth.info.name
+          user.first_name = auth.info.first_name
+          user.last_name = auth.info.last_name
+          user.deezer_image = auth.info.deezer_image
+          user.deezer_profile = auth.info.urls.Deezer
+          user.deezer_id = auth.uid
         end
       end
+      # binding.pry
   end
 
 end  
