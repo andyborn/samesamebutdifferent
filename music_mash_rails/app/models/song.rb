@@ -2,24 +2,13 @@ class Song < ActiveRecord::Base
   attr_accessible :artist_name, :song_name, :deezer_url
 
   def get_similar_songs
-    @song_name = self.song_name
-    @artist_name = self.artist_name
-    @deezer_url = self.deezer_url
-    if @deezer_url != "" && @deezer_url != nil
-      deezer_song_info_json = deezer_url_grabber(@deezer_url)
-      @song_name = deezer_song_info_json['title']
-      @artist_name = deezer_song_info_json['artist']['name']
-    end  
-    if @song_name != nil && @artist_name != nil
-      @similar_songs_json = similar_songs_grabber(@artist_name, @song_name, 10)
-      unless @similar_songs_json['error'] != nil  
-        @similar_songs_json = @similar_songs_json['similartracks']['track']
-        unless @similar_songs_json.is_a?(String)
-          @similar_songs_json = deezer_grabber(@similar_songs_json)
-        end
+    deezer_url_grabber(deezer_url) unless deezer_url.blank?
+      similar_songs_json = similar_songs_grabber(artist_name, song_name, 10)
+      unless similar_songs_json['error']
+        similar_songs_json = similar_songs_json['similartracks']['track']
+        similar_songs_json = deezer_grabber(similar_songs_json) unless similar_songs_json.is_a?(String)
       end
-    end
-    @similar_songs_json
+    similar_songs_json
   end  
 
   # methods to fetch last.fm song recommendations and deezer tracks matching last.fm similartracks titles.  check returned track artist name against last.fm artist name.  
@@ -41,7 +30,11 @@ class Song < ActiveRecord::Base
   def deezer_url_grabber(url)
     # gets track id from end of normal track url and appends to deezer api search url
     get_url = "http://api.deezer.com/track/" + url[/\d+/]
-    HTTParty.get(get_url)
+    deezer_song_info_json = HTTParty.get(get_url)
+    song_name = deezer_song_info_json['title']
+    artist_name = deezer_song_info_json['artist']['name']
+    save
+    reload
   end  
 
 
