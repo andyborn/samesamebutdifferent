@@ -1,5 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%= render :partial => 'form' %>
 
-
-<%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Back', songs_path %>
+<div>
+  <% if @similar_songs_json.is_a?(Hash) != true %>
+      <%unless @similar_songs_json.is_a?(String) %>
+        <% @similar_songs_json.each do |track|%>
+          <%if track['image'] != nil %>
+            <img src="<%= track['image'][0]['#text'] %>" alt="No Pic">
+          <%end%>  
+          <%= track['name'] + ': ' + track['artist']['name']%></br>
+          <% if track[:deezer] != nil%>
+            <a href="<%= track[:deezer]['link']%>">Deezer Link <%=track[:deezer]['link']%></a></br>
+            <audio controls>
+            <source src="<%= track[:deezer]['preview'] %>" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          <%else%>
+            <p>Sorry Deezer link was not found for this song</p>
+          <%end%>
+          </br>
+         <%end%>    
+      <%else%>
+        <p>Sorry, no Last.fm similar track data available for this song</p>
+      <% end %>
+  <% elsif @similar_songs && @similar_songs['error'] != nil %>
+    <p><%= @similar_songs['message'] + '. Please try again!'%></p>
+  <% else %>
+    <p>Please enter an artist and song and click search!</p>    
+    
+  <%end%>
+</div>

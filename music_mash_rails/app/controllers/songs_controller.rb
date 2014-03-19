@@ -1,9 +1,15 @@
 class SongsController < ApplicationController
+
+  before_filter :load
+
+  def load
+  end  
+
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all
-
+    @song = Song.new
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @songs }
@@ -12,25 +18,10 @@ class SongsController < ApplicationController
 
   # GET /songs/1
   # GET /songs/1.json
-  def show
-    @song = Song.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @song }
-    end
-  end
-
-  # GET /songs/new
-  # GET /songs/new.json
+  
   def new
-    @song = Song.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @song }
-    end
-  end
+    @song = Song.new(params[:song])
+  end  
 
   # GET /songs/1/edit
   def edit
@@ -40,8 +31,7 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(params[:song])
-
+    @song = Song.new(params[:song])   
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
@@ -51,6 +41,13 @@ class SongsController < ApplicationController
         format.json { render json: @song.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def show
+    @song = Song.find(params[:id])
+    @similar_songs_json = @song.get_similar_songs
+    
+ 
   end
 
   # PUT /songs/1

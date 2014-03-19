@@ -7,23 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!doctype html>
 
-  <p class="notice"><%= notice %></p>
-     <p class="alert"><%= alert %></p>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>SameSameButDifferent</title>
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+</head>
+<body>
+  <div id="container">
+  <h1>Same Same, But Different!</h1>
+  <h2>Last.fm + Deezer Mashup in yo face</h2>
+  <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+      </ul>
 
-     <div class='login'>
-  <% if current_user %>
-    <%= current_user.email %>
-    <%= link_to 'log out', destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to 'sign in', new_user_session_path %>
-    <%= link_to 'register', new_user_registration_path %>
-     or
-    <%= link_to 'sign in with deezer', user_omniauth_authorize_path(:deezer) %>
-  <% end %>
 
-</div>
-<%= yield %>
+
+
+
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+       <div class='login'>
+    <% if current_user %>
+      <%= current_user.email %>
+      <%= link_to 'log out', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'sign in', new_user_session_path %>
+      <%= link_to 'register', new_user_registration_path %>
+       or
+      <%= link_to 'sign in with deezer', user_omniauth_authorize_path(:deezer) %>
+    <% end %>
+  </nav>
+  </div>
+  <%= yield %>
 
 </body>
 </html>
