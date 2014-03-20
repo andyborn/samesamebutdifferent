@@ -1,11 +1,11 @@
-<%= render :partial => 'form' %>
+
 
 <div>
   <% if @similar_songs_json.is_a?(Hash) != true %>
       <%unless @similar_songs_json.is_a?(String) %>
         <% @similar_songs_json.each do |track|%>
           <%if track['image'] != nil %>
-            <img src="<%= track['image'][0]['#text'] %>" alt="No Pic">
+            <img src="<%= track['image'][2]['#text'] %>" alt="No Pic">
           <%end%>  
           <%= track['name'] + ': ' + track['artist']['name']%></br>
           <% if track[:deezer] != nil%>

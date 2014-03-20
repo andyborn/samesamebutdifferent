@@ -1,6 +1,8 @@
 class Song < ActiveRecord::Base
   attr_accessible :artist_name, :song_name, :deezer_url
 
+  validate :ensure_artist_name_is_not_error 
+
   def get_similar_songs
     artist_name = self.artist_name
     song_name = self.song_name
@@ -23,7 +25,6 @@ class Song < ActiveRecord::Base
       artist = self.artist_name
       song = self.song_name
       lastfm_return = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=d3efa10c1b792c94cbe21ae756ae44ae&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&format=json")    
-      binding.pry
       if lastfm_return['error']
         self.artist_name = "error"
         self.song_name = "error"
@@ -81,4 +82,15 @@ class Song < ActiveRecord::Base
         '%7E' => '~'
     )
   end
+
+  def ensure_artist_name_is_not_error
+    errors.add :artist_name, "cannot be `error`" if artist_name == 'error'
+
+  end
+
+
+
+
+
+
 end

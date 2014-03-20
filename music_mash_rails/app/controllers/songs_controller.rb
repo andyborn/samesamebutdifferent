@@ -33,10 +33,7 @@ class SongsController < ApplicationController
   def create
     @song = Song.new(params[:song])
     @song.lastfm_params_normalizer if @song.deezer_url.blank? 
-    binding.pry
-    if @song.artist_name == "error" 
-      render action: "index", notice: "blah" and return
-    end  
+      
     
     unless (@song.deezer_url.blank? || @song.url_is_invalid?) 
       @song.deezer_url_grabber 
