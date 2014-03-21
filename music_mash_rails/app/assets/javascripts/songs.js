@@ -26,6 +26,14 @@ $(document).ready(function() {
             url: '/songs/' + data.id + '.json',
             success: function(json) {
                           _.each(json, function(track) {
+                            
+                            if (track.deezer == null) {
+                              track.deezer = {
+                                link: "deezer track not found",
+                                preview: "deezer track not found"
+                              }
+                            };
+                            console.log(track);
                             parsedTemplate += songTemplate(track); 
 
 
