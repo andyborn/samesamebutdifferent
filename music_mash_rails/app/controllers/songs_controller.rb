@@ -3,6 +3,7 @@ class SongsController < ApplicationController
   before_filter :load
 
   def load
+    
   end  
 
   # GET /songs
@@ -86,4 +87,5 @@ class SongsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

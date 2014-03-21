@@ -21,28 +21,40 @@ $(document).ready(function() {
         method: 'POST',
         data: {'song[artist_name]':artist_name, 'song[song_name]':song_name, 'song[deezer_url]':deezer_url},
         success: function(data) {
-          console.log(data);
+       
           $.ajax({
             url: '/songs/' + data.id + '.json',
             success: function(json) {
-                          _.each(json, function(track) {
+                _.each(json, function(track) {
                             
-                            if (track.deezer == null) {
-                              track.deezer = {
-                                link: "deezer track not found",
-                                preview: "deezer track not found"
-                              }
-                            };
-                            console.log(track);
-                            parsedTemplate += songTemplate(track); 
+                    if (track.deezer == null) {
+                        track.deezer = {
+                            link: "deezer track not found",
+                            preview: "deezer track not found"
+                              } // close attributes
+                        }; // close if
+                    console.log(track);
+                    parsedTemplate += songTemplate(track); 
 
 
-                            }); // close _.each
-                                console.log('before');
-                            console.log(parsedTemplate);
-                            console.log('after');
-                            $('#similar_songs_collection').html(parsedTemplate);
-                            parsedTemplate = "";
+                }); // close _.each
+  
+                        $('#similar_songs_collection').html(parsedTemplate);
+                        parsedTemplate = "";
+
+                        $('.deezer_send').on('click', function(ev){
+                              
+                            var deezer_id = $(ev.currentTarget).data('deezer-id');
+                            $.ajax({
+                                url: '/deezer/post_to_deezer.json',
+                                method: 'POST',
+                                data: {'deezer_id':deezer_id}
+                                
+                                
+
+                            }); //close AJAX3    
+
+                        });// close button event
 
                     } // close success2
           }); // close AJAX2
@@ -51,6 +63,7 @@ $(document).ready(function() {
 
   }); // close submit function
 
+  
   
 
 }); //close doc ready
