@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20140319154201) do
     t.string   "deezer_image"
     t.string   "token"
     t.string   "deezer_profile"
+    t.string   "deezer_playlist"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -7,5 +7,6 @@ class AddColumnsToUsers < ActiveRecord::Migration
     add_column :users, :deezer_image, :string
     add_column :users, :token, :string
     add_column :users, :deezer_profile, :string
+    add_column :users, :deezer_playlist, :string
   end
 end

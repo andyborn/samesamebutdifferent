@@ -104,7 +104,7 @@ $(document).ready(function() {
                         });
 
                         $('.song_remove').on('click', function(ev){ 
-                            $(ev.currentTarget).parents('.similar_song').hide();
+                            $(ev.currentTarget).parents('.similar_song').remove();
                         });
 
                         $('.deezer_send').on('click', function(ev){
