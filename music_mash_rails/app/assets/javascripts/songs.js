@@ -55,14 +55,20 @@ $(document).ready(function() {
             success: function(json) {
                 _.each(json, function(track) {
                             
-                    if (track.deezer == null) {
-                        track.deezer = {
-                            link: "deezer track not found",
-                            preview: "deezer track not found"
-                              } // close attributes
-                        }; // close if
-                    console.log(track);
-                    parsedTemplate += songTemplate(track); 
+                    if (track.deezer != null) 
+                      {
+                        parsedTemplate += songTemplate(track);
+                      }  // close if
+                    else 
+                        {
+                          track.deezer = {
+                          link: "deezer track not found",
+                          preview: "deezer track not found"
+                              }; // close attributes.
+                          }   // close else.     
+                         
+                    
+                     
 
 
                 }); // close _.each

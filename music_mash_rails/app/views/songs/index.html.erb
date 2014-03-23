@@ -13,7 +13,7 @@
     <div class="song_dropdown">
       <div class="dropdown_contents">
         <audio controls>
-            <source src="http://cdn-preview-4.deezer.com/stream/43808a3ac856cc117362ab94718603ba-3.mp3" type="audio/mpeg">
+            <source src="<%%=deezer.preview%>" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <div class="buttons">
@@ -25,10 +25,16 @@
  </div> 
 </script>
 
-<%= render :partial => 'form' %>
+<% if @current_user%>
 
+  <%= render :partial => 'form' %>
 
-<div id='similar_songs_collection'>
-</div>
+  <div id='similar_songs_collection'>
+  </div>
+
+<%else%>
+  <h2>(a deezer.com + last.fm mashup)</h2></br>
+  <h1><%= link_to 'Please sign in with deezer', user_omniauth_authorize_path(:deezer) %></h1>
+<%end%>  
 
  

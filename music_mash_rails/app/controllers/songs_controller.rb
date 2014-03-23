@@ -10,7 +10,7 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
     @song = Song.new
-    
+    @current_user = current_user
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @songs }

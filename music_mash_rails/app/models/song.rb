@@ -7,7 +7,7 @@ class Song < ActiveRecord::Base
     artist_name = self.artist_name
     song_name = self.song_name
     
-    similar_songs_json = similar_songs_grabber(artist_name, song_name, 10)
+    similar_songs_json = similar_songs_grabber(artist_name, song_name, 20)
       unless similar_songs_json['error']
         similar_songs_json = similar_songs_json['similartracks']['track']
         similar_songs_json = deezer_grabber(similar_songs_json) unless similar_songs_json.is_a?(String)

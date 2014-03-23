@@ -4,7 +4,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         user = User.from_omniauth(request.env["omniauth.auth"])
         token = request.env["omniauth.auth"]['credentials']['token']
         @test = HTTParty.get("https://api.deezer.com/artist/27?output=json&output=json&access_token=#{token}")
-        binding.pry
+        
         if user.persisted?
           flash.notice = "Signed in Through Deezer!"
           sign_in_and_redirect user

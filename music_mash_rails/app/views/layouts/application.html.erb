@@ -20,21 +20,20 @@
       <% if current_user %>
         hi <%= current_user.name %>!
         <%= link_to 'log out', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'sign in with deezer', user_omniauth_authorize_path(:deezer) %>
+      
       <% end %>
     </div>
     <div>
       <h1>Welcome to <span>same same but different</span></h1><br>
-      <h2>(a deezer.com + last.fm mashup)</h2>
+      
     </div>
 
 
 
 
 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <!--   <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
 
     
   <%= yield %>
