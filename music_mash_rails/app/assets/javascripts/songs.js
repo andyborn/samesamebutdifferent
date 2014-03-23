@@ -60,7 +60,15 @@ $(document).ready(function() {
 
             success: function(json) {
                 _.each(json, function(track) {
+                    
+                    if (track.image == null)
+                        {
+                            var defaultCover = "http://www.rocksound.tv/images/uploads/deezer300.jpg"
+                            track.image = {}
+                            track.image = track.image = [{"#text":defaultCover,"size":"small"},{"#text":defaultCover,"size":"medium"},{"#text":defaultCover,"size":"large"},{"#text":defaultCover,"size":"extralarge"}];
                             
+                        }
+
                     if (track.deezer != null) 
                       {
                         parsedTemplate += songTemplate(track);
@@ -71,7 +79,7 @@ $(document).ready(function() {
                           link: "deezer track not found",
                           preview: "deezer track not found"
                               }; // close attributes.
-                          }   // close else.     
+                        }   // close else.     
                          
                     
                      
