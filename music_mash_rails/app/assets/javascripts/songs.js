@@ -44,6 +44,8 @@ $(document).ready(function() {
       var song_name = $('#song_song_name').val();
       var deezer_url = $('#song_deezer_url').val();
 
+      $('#similar_songs_collection').html('<div id="load_container"><div id="load_gif"></div></div>').focus();
+
       $.ajax({
         url: '/songs.json',
         method: 'POST',
