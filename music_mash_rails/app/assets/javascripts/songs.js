@@ -50,10 +50,14 @@ $(document).ready(function() {
         url: '/songs.json',
         method: 'POST',
         data: {'song[artist_name]':artist_name, 'song[song_name]':song_name, 'song[deezer_url]':deezer_url},
+        error: function(json) {
+              $('#similar_songs_collection').html('<h2>Sorry, song not found</h2>').focus();
+            },
         success: function(data) {
        
           $.ajax({
             url: '/songs/' + data.id + '.json',
+
             success: function(json) {
                 _.each(json, function(track) {
                             
@@ -74,9 +78,14 @@ $(document).ready(function() {
 
 
                 }); // close _.each
-  
+                    if (parsedTemplate != "") {
                         $('#similar_songs_collection').html('<h1>Side B</h1>' + parsedTemplate);
                         parsedTemplate = "";
+                        }
+                    else 
+                        {  
+                          $('#similar_songs_collection').html('<h2>Sorry, no Deezer data returned for this song.</h2><h2>Try checking that artist name is spelt correctly (eg. The Rolling Stones, not Rolling Stones!) </h2>');
+                        }
 
                         $('.similar_song').mouseenter(function(){
                           $(this).find('.song_dropdown').slideDown();
@@ -107,13 +116,22 @@ $(document).ready(function() {
                                     });
                                   },
                                 error: function(json) {
-                                  // "Track already exists"
-                                  var n = noty({
-                                    text: json.responseJSON.error.message,
-                                    type: 'error',
-                                    timeout: 2000
-                                  });
-                                  
+                                    // "Track already exists"
+                                    if (json.responseJSON.error.message == "Track already exists")
+                                        { var n = noty({
+                                          text: 'You have already added this track to you deezer profile',
+                                          type: 'error',
+                                          timeout: 2000}); // close noty
+                                          $(ev.currentTarget).hide();
+                                        }
+
+                                    else {  
+                                    var n = noty({
+                                        text: 'Deezer session token has expired, please log in again to refresh',
+                                        type: 'error',
+                                        timeout: 2000
+                                        }); // close noty
+                                    }
                                 }
 
                             }); //close AJAX3    

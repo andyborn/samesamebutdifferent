@@ -5,6 +5,7 @@
  body {
   padding-top: 20px;
   text-align: center;
+  
   font-family: monaco, monospace;
   background-color: #ddd;
   background-size: cover;
@@ -17,11 +18,12 @@ h1, h2 {
 }
 h1 {
   font-size: 30px;
-  padding: 15px 5px;
+  line-height: 150%;
+  padding: 0px 5px;
 }
 h2 {
   font-size: 20px;
-  padding: 4px 8px;
+  padding: 5px 8px;
 }
 span {
   background: #fd0;
@@ -108,7 +110,7 @@ audio {
 
 #sign_in_link {
   position:absolute;
-  left:61px;
+  left:41px;
   top:46px;
   border-radius: 5px;
   display: block;
@@ -118,13 +120,13 @@ audio {
 
 #artist_input {
   position:absolute;
-  left:80px;
+  left:74px;
   top:245px;
 }
 
 #song_input {
   position:absolute;
-  left:80px;
+  left:74px;
   top:68px;
 }
 

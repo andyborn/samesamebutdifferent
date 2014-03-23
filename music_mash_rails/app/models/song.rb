@@ -1,6 +1,7 @@
 class Song < ActiveRecord::Base
   attr_accessible :artist_name, :song_name, :deezer_url
 
+
   validate :ensure_artist_name_is_not_error 
 
   def get_similar_songs
@@ -85,7 +86,8 @@ class Song < ActiveRecord::Base
 
   def ensure_artist_name_is_not_error
     errors.add :artist_name, "cannot be `error`" if artist_name == 'error'
-
+    errors.add :artist_name, "cannot be `blank`" if artist_name == ''
+    errors.add :song_name, "cannot be `blank`" if song_name == ''
   end
 
 
