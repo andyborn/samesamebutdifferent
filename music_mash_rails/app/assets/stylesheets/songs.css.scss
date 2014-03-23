@@ -1,3 +1,119 @@
 // Place all the styles related to the Songs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ body {
+  padding-top: 40px;
+  text-align: center;
+  font-family: monaco, monospace;
+  background-color: #ddd;
+  background-size: cover;
+}
+h1, h2 {
+  margin: 20px 0;
+  text-decoration: bold;
+  display: inline-block;
+  background: #fff;
+}
+h1 {
+  font-size: 30px;
+  padding: 15px 5px;
+}
+h2 {
+  font-size: 20px;
+  padding: 4px 8px;
+}
+span {
+  background: #fd0;
+}
+
+#tape_container, #songs_container {
+  max-width: 600px;
+  margin: auto;
+  text-align: left;
+}
+
+#tape_image {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+input {
+  position: absolute;
+  height: 42px;
+  width: 450px;
+  font-size: 25px;
+  padding-left: 0px;
+  text-align: center;
+  font-family: monaco, monospace;
+  border-radius: 10px
+}
+
+#song_submit input {
+  height: 45px;
+  width: 200px;
+  font-family: monaco, monospace;
+  background-color: #fd0;
+  font-size: 25px;
+  border-radius: 10px;
+  
+}
+
+.song_dropdown {
+ clear:both;
+ margin-top: 30px;
+}
+
+.post_song, .delete_song{
+  height: 30px;
+  width: 100px;
+  font-family: monaco, monospace;
+  background-color: #fd0;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.song_image_medium {
+  float:left;
+  margin-right: 15px;
+}
+
+.song_info h2 {
+  margin-bottom: 0;
+  margin-top: 5;
+}
+
+.similar_song {
+  border-bottom: dotted 2px #999;
+  padding: 10px 0
+}
+
+audio {
+ width: 400;
+ margin: 5px;
+}
+
+#tape {
+  position:relative
+}
+
+#artist_input {
+  position:absolute;
+  left:80px;
+  top:245px;
+}
+
+#song_input {
+  position:absolute;
+  left:80px;
+  top:68px;
+}
+
+#song_submit {
+  position:absolute;
+  left:205px;
+  top:325px;
+}
+
+

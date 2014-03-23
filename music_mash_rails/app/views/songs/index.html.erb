@@ -1,18 +1,16 @@
 <script type="text/template" id="tmpl_song">
 <div class="similar_song" >
-    <img class="song_image" src="<%%=image[1]['#text'] %>">
+    <img class="song_image" src="<%%=image[2]['#text'] %>">
     <p class="song_name"><%%=name  %></p>
     <p class="artist_name"><%%=artist.name  %></p>
     <p class="deezer_link"><%%=deezer.link %></p>
+    <button type="button" class="song_remove">X</button>
     <button type="button" class="deezer_send" data-deezer-id="<%%=deezer.id%>">Send!</button>
  </div> 
 </script>
 
-<h1>Listing songs</h1>
-
 <%= render :partial => 'form' %>
 
-<br />
 
 <div id='similar_songs_collection'>
 </div>
