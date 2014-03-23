@@ -1,11 +1,27 @@
+
 <script type="text/template" id="tmpl_song">
 <div class="similar_song" >
-    <img class="song_image" src="<%%=image[2]['#text'] %>">
-    <p class="song_name"><%%=name  %></p>
-    <p class="artist_name"><%%=artist.name  %></p>
+  <img class="song_image_medium" src="<%%=image[2]['#text'] %>">
+  <div class="song_info">  
+    <h2 class="song_name"><%%=name  %></h2></br>
+    by <h2 class="artist_name"><%%=artist.name  %></h2>
     <p class="deezer_link"><%%=deezer.link %></p>
-    <button type="button" class="song_remove">X</button>
-    <button type="button" class="deezer_send" data-deezer-id="<%%=deezer.id%>">Send!</button>
+    
+  </div>  
+    
+    
+    <div class="song_dropdown">
+      <div class="dropdown_contents">
+        <audio controls>
+            <source src="http://cdn-preview-4.deezer.com/stream/43808a3ac856cc117362ab94718603ba-3.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="buttons">
+        <button type="button" class="song_remove">Delete</button>
+        <button type="button" class="deezer_send" data-deezer-id="<%%=deezer.id%>">Add</button>
+        </div>
+       </div> 
+    </div>
  </div> 
 </script>
 

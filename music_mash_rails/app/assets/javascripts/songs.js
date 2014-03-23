@@ -67,8 +67,16 @@ $(document).ready(function() {
 
                 }); // close _.each
   
-                        $('#similar_songs_collection').html(parsedTemplate);
+                        $('#similar_songs_collection').html('<h1>Side B</h1>' + parsedTemplate);
                         parsedTemplate = "";
+
+                        $('.similar_song').mouseenter(function(){
+                          $(this).find('.song_dropdown').slideDown();
+                        });
+
+                        $('.similar_song').mouseleave(function(){
+                          $(this).find('.song_dropdown').slideUp();
+                        });
 
                         $('.song_remove').on('click', function(ev){ 
                             $(ev.currentTarget).parents('.similar_song').hide();

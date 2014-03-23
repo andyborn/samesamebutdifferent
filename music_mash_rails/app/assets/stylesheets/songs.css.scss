@@ -27,7 +27,7 @@ span {
   background: #fd0;
 }
 
-#tape_container, #songs_container {
+#tape_container, #similar_songs_collection {
   max-width: 600px;
   margin: auto;
   text-align: left;
@@ -62,9 +62,10 @@ input {
 .song_dropdown {
  clear:both;
  margin-top: 30px;
+ display: none;
 }
 
-.post_song, .delete_song{
+.song_remove, .deezer_send{
   height: 30px;
   width: 100px;
   font-family: monaco, monospace;
@@ -80,13 +81,15 @@ input {
 }
 
 .song_info h2 {
-  margin-bottom: 0;
-  margin-top: 5;
+  margin-bottom: 0px;
+  margin-top: 5px;
 }
 
 .similar_song {
   border-bottom: dotted 2px #999;
-  padding: 10px 0
+  padding: 20px 0;
+  min-height: 135px;
+  padding-left: 30px;
 }
 
 audio {
@@ -95,7 +98,7 @@ audio {
 }
 
 #tape {
-  position:relative
+  position:relative;
 }
 
 #artist_input {
@@ -116,4 +119,7 @@ audio {
   top:325px;
 }
 
+.buttons {
+  margin-top: -10px;
+}
 
