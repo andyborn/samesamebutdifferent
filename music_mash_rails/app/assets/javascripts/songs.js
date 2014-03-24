@@ -42,14 +42,15 @@ $(document).ready(function() {
 
      
   function getSongs(ev, url) {  
-      console.log("jhgffgh");
+      
       ev.preventDefault();
-      $('#similar_songs_collection').html('');
+      // $('#similar_songs_collection').html('');
       var artist_name = $('#song_artist_name').val();
       var song_name = $('#song_song_name').val();
-      var deezer_url = $('#song_deezer_url').val();
+      var deezer_url = url;
 
-      $('#similar_songs_collection').html('<div id="load_container"><div id="load_gif"></div></div>').focus();
+      $('#cog1').addClass('rotating1');
+      $('#cog2').addClass('rotating2');
 
       $.ajax({
         url: '/songs.json',
@@ -64,6 +65,8 @@ $(document).ready(function() {
             url: '/songs/' + data.id + '.json',
 
             success: function(json) {
+                $('#cog1').removeClass('rotating1');
+                $('#cog2').removeClass('rotating2');
                 _.each(json, function(track) {
                     
                     if (track.image == null)
@@ -94,6 +97,7 @@ $(document).ready(function() {
                     if (parsedTemplate != "") {
                         $('#similar_songs_collection').html('<h1>Side B</h1>' + parsedTemplate);
                         parsedTemplate = "";
+
                         }
                     else 
                         {  
@@ -101,12 +105,28 @@ $(document).ready(function() {
                         }
 
                         $('.similar_song').mouseenter(function(){
-                          $(this).find('.song_dropdown').slideDown();
+                          $(this).find('.play_icon').show(100);
+                          $(this).find('.song_dropdown').show(100);
                         });
 
                         $('.similar_song').mouseleave(function(){
-                          $(this).find('.song_dropdown').slideUp();
+                          $(this).find('.play_icon').hide(100);
+                          $(this).find('.song_dropdown').hide(100);
                         });
+
+                        $('.play_icon').click(function(){
+                          var that = $(this).parent('.similar_song').find('.song_player').get(0);
+                          if (that.paused == false) {
+                                that.pause();
+                                
+                            } else {
+                                that.play();
+                                
+                            }
+                          });
+
+                          // $(this).parent('.similar_song').find('.song_player').trigger("play");
+                          
 
                         $('.song_info').click(function(){
                           $(this).parent('.similar_song').find('.song_dropdown').slideToggle();
@@ -118,6 +138,16 @@ $(document).ready(function() {
 
                         $('.song_remove').on('click', function(ev){ 
                             $(ev.currentTarget).parents('.similar_song').remove();
+                        });
+
+                        $('.deezer_more').on('click', function(ev){ 
+                            var deezer_url = $(ev.currentTarget).data('deezer-url');
+                            var song_name = $(ev.currentTarget).data('song-name');
+                            var artist_name = $(ev.currentTarget).data('artist-name');
+
+                            $('#song_artist_name').val(artist_name);
+                            $('#song_song_name').val(song_name);
+                            getSongs(ev, deezer_url);
                         });
 
                         $('.deezer_send').on('click', function(ev){
