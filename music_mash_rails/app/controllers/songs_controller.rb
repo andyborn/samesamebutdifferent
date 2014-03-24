@@ -55,8 +55,12 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @similar_songs_json = @song.get_similar_songs
     respond_to do |format|
-      format.html { render @song}
-      format.json { render json: @similar_songs_json}
+      if @similar_songs_json.is_a?(String)
+        format.json { render json: @similar_songs_json, status: :unprocessable_entity}
+      else  
+        
+        format.json { render json: @similar_songs_json}
+      end  
     end
   end
 
