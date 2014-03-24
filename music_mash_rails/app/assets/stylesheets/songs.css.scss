@@ -280,5 +280,26 @@ display: none;
   border-radius: 10px;
   }
 
+  #cog1, #cog2 {
+    width: 67px;
+    
+  }
+
+  #cassette_cog1 {
+    position: absolute;
+    left: 107px;
+    top: 129px;
+  }
+
+  #cassette_cog2 {
+    position: absolute;
+    left: 326px;
+    top: 129px;
+  }
+
+  .play_icon {
+  
+  display: block;
+  }
 }
 
