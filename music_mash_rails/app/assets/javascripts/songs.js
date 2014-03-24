@@ -37,7 +37,7 @@ $(document).ready(function() {
             error: function(json) {
                   $('#cog1').removeClass('rotating1');
                   $('#cog2').removeClass('rotating2');
-                  $('#similar_songs_collection').html('<h2>Sorry, no Last.fm similar song data found for this track.</h2>').focus();
+                  $('#similar_songs_collection').html('<h2>Sorry, no Last.fm similar song data found for this song.</h2>').focus();
                 },
 
             success: function(json) {

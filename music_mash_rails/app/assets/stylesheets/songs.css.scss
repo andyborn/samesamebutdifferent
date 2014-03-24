@@ -192,7 +192,8 @@ display: none;
 }
 
 .buttons {
-  margin-top: -10px;
+  margin-top: -3px;
+  margin-right: 5px;
 }
 
 .song_image_medium img {
@@ -212,6 +213,8 @@ display: none;
   height:500px;
   width:500px;
 }
+
+/* media specific */
 
 @media screen and (max-width:740px) {
   #tape_image {
