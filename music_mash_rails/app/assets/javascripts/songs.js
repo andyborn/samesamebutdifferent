@@ -37,7 +37,12 @@ $(document).ready(function() {
   var songTemplate = _.template(tmpl_song);
 
   $('#new_song').on('submit', function(ev){
+    getSongs(ev);
+  });
 
+     
+  function getSongs(ev, url) {  
+      console.log("jhgffgh");
       ev.preventDefault();
       $('#similar_songs_collection').html('');
       var artist_name = $('#song_artist_name').val();
@@ -103,6 +108,14 @@ $(document).ready(function() {
                           $(this).find('.song_dropdown').slideUp();
                         });
 
+                        $('.song_info').click(function(){
+                          $(this).parent('.similar_song').find('.song_dropdown').slideToggle();
+                        });
+
+                        $('.song_info').click(function(){
+                          $(this).parent('.similar_song').find('.song_dropdown').slideToggle();
+                        });
+
                         $('.song_remove').on('click', function(ev){ 
                             $(ev.currentTarget).parents('.similar_song').remove();
                         });
@@ -151,7 +164,7 @@ $(document).ready(function() {
         } // close success1
       }); //close AJAX1
 
-  }); // close submit function
+  }; // close submit function
 
   
   
