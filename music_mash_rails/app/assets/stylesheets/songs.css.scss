@@ -25,7 +25,7 @@ h2 {
   font-size: 20px;
   padding: 5px 8px;
 }
-span {
+#titles span {
   background: #fd0;
 }
 
@@ -155,5 +155,78 @@ audio {
   background:url('http://sierrafire.cr.usgs.gov/images/loading.gif') no-repeat center center;
   height:500px;
   width:500px;
+}
+
+@media screen and (max-width:740px) {
+  #tape_image {
+  max-width: 500px;
+  margin: 20px auto;
+  }
+
+  #tape_container, #similar_songs_collection {
+    max-width: 500px;
+    margin: auto;
+    text-align: left;
+  }
+
+  #sign_in_link {
+    position:absolute;
+
+    left:31px;
+    top:40px;
+    border-radius: 5px;
+    display: block;
+
+  }
+
+  #sign_in_link h1 {
+    font-size: 25px;
+  }
+
+  #artist_input {
+    position:absolute;
+    left:68px;
+    top:207px;
+  }
+
+  #song_input {
+    position:absolute;
+    left:68px;
+    top:58px;
+  }
+
+  #song_submit {
+    position:absolute;
+    left:175px;
+    top:274px;
+  }
+
+  input {
+  position: absolute;
+  height: 32px;
+  width: 350px;
+  font-size: 20px;
+  padding-left: 0px;
+  text-align: center;
+  font-family: monaco, monospace;
+  border-radius: 10px
+  }
+
+  #song_submit input {
+  height: 35px;
+  width: 150px;
+  font-family: monaco, monospace;
+  background-color: #fd0;
+  font-size: 20px;
+  border-radius: 10px;
+
+  .song_dropdown {
+  clear:both;
+  margin-top: 30px;
+  display: block;
+}
+  
+}
+
 }
 
