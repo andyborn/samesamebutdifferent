@@ -122,7 +122,9 @@ $(document).ready(function() {
 
   }; // close submit function
 
-    function mouseActions() {
+  //////////////////
+
+  function mouseActions() {
     $('.similar_song').mouseenter(function(){
       $(this).find('.play_icon').show(100);
       $(this).find('.song_dropdown').show(100);
@@ -220,7 +222,7 @@ $(document).ready(function() {
 
         }); //close AJAX3    
       
-    });// close button event
+      });// close button event
   }; 
   
 

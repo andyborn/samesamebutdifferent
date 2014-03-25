@@ -295,8 +295,8 @@ display: none;
 
   #song_submit {
     position:absolute;
-    left:175px;
-    top:274px;
+    left:168px;
+    top:268px;
   }
 
   input {
@@ -311,8 +311,8 @@ display: none;
   }
 
   #song_submit input {
-  height: 35px;
-  width: 150px;
+  height: 50px;
+  width: 160px;
   font-family: monaco, monospace;
   background-color: #fd0;
   font-size: 20px;
@@ -339,6 +339,12 @@ display: none;
   .play_icon {
   
   display: block;
+  }
+
+  #side_A_button{
+    position: absolute;
+    left: 7px;
+    top: 267px;  
   }
 }
 
