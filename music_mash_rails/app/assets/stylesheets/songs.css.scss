@@ -145,7 +145,24 @@ display: none;
   
 }
 
-@-webkit-keyframes rotating {
+@-webkit-keyframes rotating2 {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+.rotating1 {
+    -webkit-animation: rotating2 1s linear infinite;
+}
+
+.rotating2 {
+    -webkit-animation: rotating2 1.5s linear infinite;
+}
+
+@-webkit-keyframes rotating1 {
     from{
         -webkit-transform: rotate(0deg);
     }
@@ -154,12 +171,12 @@ display: none;
     }
 }
 
-.rotating1 {
-    -webkit-animation: rotating 3s linear infinite;
+.rotating3 {
+    -webkit-animation: rotating1 3s linear infinite;
 }
 
-.rotating2 {
-    -webkit-animation: rotating 6s linear infinite;
+.rotating4 {
+    -webkit-animation: rotating1 5s linear infinite;
 }
 
 

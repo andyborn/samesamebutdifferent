@@ -85,12 +85,22 @@ $(document).ready(function() {
                             var that = $(this).parent('.similar_song').find('.song_player').get(0);
                             if (that.paused == false) {
                                   that.pause();
-                                  
+                                  $('#cog1').removeClass('rotating3');
+                                  $('#cog2').removeClass('rotating4');
                               } else {
                                   that.play();
-                                  
+                                  $('#cog1').addClass('rotating3');
+                                  $('#cog2').addClass('rotating4');
                               }
+
+                           $('audio').bind('ended', function(){
+                              $('#cog1').removeClass('rotating3');
+                              $('#cog2').removeClass('rotating4');
+                           })   
+                          // document.querySelector("audio").addEventListener("ended", alert('hey'),false);
                           });
+
+
 
                             // $(this).parent('.similar_song').find('.song_player').trigger("play");
                             
