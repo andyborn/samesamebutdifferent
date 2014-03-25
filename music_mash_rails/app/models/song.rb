@@ -53,6 +53,14 @@ class Song < ActiveRecord::Base
     end
   end
 
+  def deezer_track_grabber(deezer_songs_hash)
+    deezer_songs_hash['data'].each do |favsong|
+      get_url = "http://api.deezer.com/track/" + favsong['id']
+      deezer_song_info_json = HTTParty.get(get_url)
+      favsong[:song_info] = deezer_song_info_json
+    end
+  end    
+
   def deezer_url_grabber
     # gets track id from end of normal track url and appends to deezer api search url
     get_url = "http://api.deezer.com/track/" + self.deezer_url[/\d+/]

@@ -1,5 +1,5 @@
 
-<script type="text/template" id="tmpl_song">
+<script type="text/template" id="tmpl_similar_song">
 <div class="similar_song" >
   
   <%= image_tag "Yellow Triangle-01.png", class: "play_icon" %>
@@ -23,6 +23,36 @@
         <button type="button" class="song_remove">Delete!</button>
         <button type="button" class="deezer_send" data-deezer-id="<%%=deezer.id%>">Add!</button>
         <button type="button" class="deezer_more" data-deezer-url="<%%=deezer.link%>" data-song-name="<%%=name%>" data-artist-name="<%%=artist.name%>">More!</button>
+        </div>
+       </div> 
+    </div>
+ </div> 
+</script>
+
+<script type="text/template" id="tmpl_fav_song">
+<div class="similar_song" >
+  
+  <%= image_tag "Yellow Triangle-01.png", class: "play_icon" %>
+  
+  <img class="song_image_medium" src="<%%=song_info.album.cover%>" width=126px />
+  <div class="song_info">  
+    <h2 class="song_name"><%%=song_info.title  %></h2></br>
+    by <h2 class="artist_name"><%%=song_info.artist.name  %></h2>
+    <p class="deezer_link"><%%=song_info.link %></p>
+  </div>   
+    <audio class="song_player" controls>
+            <source src="<%%=song_info.preview%>" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+    
+    <div class="song_dropdown">
+      <div class="dropdown_contents">
+        
+        <div class="buttons">
+        <button type="button" class="song_remove">Delete!</button>
+        <button type="button" class="deezer_send" data-deezer-id="<%%=song_info.id%>">Add!</button>
+        <button type="button" class="deezer_more" data-deezer-url="<%%=song_info.link%>" data-song-name="<%%=song_info.title%>" data-artist-name="<%%=song_info.artist.name%>">More!</button>
         </div>
        </div> 
     </div>
