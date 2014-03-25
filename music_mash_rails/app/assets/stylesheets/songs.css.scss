@@ -66,6 +66,7 @@ input {
   
 }
 
+
 .song_dropdown {
  clear:both;
  margin-top: 30px;
@@ -206,6 +207,27 @@ display: none;
   position:absolute;
   left:205px;
   top:325px;
+}
+
+#side_A_button{
+  position: absolute;
+  left: 18px;
+  top: 321px;
+  
+  
+}
+
+#song_submit button {
+  border: solid 2px black;
+}
+
+#side_A_button button  {
+  border-radius: 10px;
+  border: solid 2px black;
+  height: 50px;
+  width: 80px;
+  font-size: 30px;
+  font-family: monaco, monospace;
 }
 
 .buttons {

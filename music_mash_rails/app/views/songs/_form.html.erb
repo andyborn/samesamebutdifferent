@@ -1,10 +1,11 @@
 <div id="tape_container">
+  <div id="tape">
 <%= form_for @song do |f| %>
   
     
-    <div id="tape">
+    
       
-      <%= image_tag "cassette_tape_retro.png", id: "tape_image" %> 
+      <%= image_tag "cassette_tape_red.png", id: "tape_image" %> 
       
       <div id="cassette_cog1"><%= image_tag "cassette_cog.png", id: "cog1"%></div>
       <div id="cassette_cog2"><%= image_tag "cassette_cog.png", id: "cog2"%></div>
@@ -20,8 +21,15 @@
       
       <div id="song_submit">
         <%= f.submit "Get Songs!" %>
-      </div>  
-    </div>
+      </div>
+
+
   
 <% end %>
+  
+   
+
+      <div id="side_A_button"><button>A&lt;&lt;</button></div>
+    
+ </div> 
 </div>  

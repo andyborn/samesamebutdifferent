@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  //////// on page load
+
   var parsedTemplate = "";
   var parsedTemplate2 = "";
   var tmpl_similar_song = $('#tmpl_similar_song').html();
@@ -8,27 +10,35 @@ $(document).ready(function() {
   var songTemplate = _.template(tmpl_similar_song);
   var songTemplate2 = _.template(tmpl_fav_song);
 
-  $.ajax({
-        url: '/deezer/get_deezer_fav_tracks.json',
-        method: 'GET',
-        success: function(json){
-          console.log(json);
-          _.each(json['data'], function(track){
-              if (track.song_info.album.cover == null){
-                      var defaultCover = "http://www.rocksound.tv/images/uploads/deezer300.jpg"
-                      track.song_info.album.cover = {}
-                      track.song_info.album.cover = [{"#text":defaultCover,"size":"small"},{"#text":defaultCover,"size":"medium"},{"#text":defaultCover,"size":"large"},{"#text":defaultCover,"size":"extralarge"}];
-                } //close image if.
-                console.log(track);
+  mouseActions();
 
-              parsedTemplate2 += songTemplate2(track);
+  /////////////////////
 
-          }) // close each
-         $('#similar_songs_collection').html('<h1>Side A</h1>' + parsedTemplate2);
-         parsedTemplate2 = '';
-         mouseActions(); 
-        } // close success
-      }); // close side A ajax
+  function sideA(){
+      $.ajax({
+            url: '/deezer/get_deezer_fav_tracks.json',
+            method: 'GET',
+            success: function(json){
+              console.log(json);
+              _.each(json['data'], function(track){
+                  if (track.song_info.album.cover == null){
+                          var defaultCover = "http://www.rocksound.tv/images/uploads/deezer300.jpg"
+                          track.song_info.album.cover = {}
+                          track.song_info.album.cover = [{"#text":defaultCover,"size":"small"},{"#text":defaultCover,"size":"medium"},{"#text":defaultCover,"size":"large"},{"#text":defaultCover,"size":"extralarge"}];
+                    } //close image if.
+                    console.log(track);
+
+                  parsedTemplate2 += songTemplate2(track);
+
+              }) // close each
+             $('#similar_songs_collection').html('<h1>Side A</h1>' + parsedTemplate2);
+             parsedTemplate2 = '';
+             mouseActions(); 
+            } // close success
+          }); // close side A ajax
+  };
+
+////////////////////
 
   $('#new_song').on('submit', function(ev){
     getSongs(ev);
@@ -167,6 +177,10 @@ $(document).ready(function() {
         $('#song_artist_name').val(artist_name);
         $('#song_song_name').val(song_name);
         getSongs(ev, deezer_url);
+    });
+
+    $('#side_A_button').on('click', function(){
+      sideA();
     });
 
     $('.deezer_send').on('click', function(ev){
