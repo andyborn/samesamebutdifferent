@@ -25,6 +25,16 @@ h2 {
   font-size: 20px;
   padding: 5px 8px;
 }
+
+button {
+  border: none;
+}
+
+#titles {
+  margin-bottom: 25px;
+  margin-top: 20px;
+}
+
 #titles span {
   background: #fd0;
 }
@@ -36,8 +46,9 @@ h2 {
 }
 
 #tape_container h1, #similar_songs_collection h1 {
-  margin-bottom: 0;
-  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  font-size: 25px;
 }
 
 #tape_image {
@@ -53,7 +64,8 @@ input {
   padding-left: 0px;
   text-align: center;
   font-family: monaco, monospace;
-  border-radius: 10px
+  border: none;
+  border-radius: 10px;
 }
 
 #song_submit input {
@@ -163,6 +175,14 @@ display: none;
     -webkit-animation: rotating2 1.5s linear infinite;
 }
 
+.rotating5 {
+    -webkit-animation: rotating1 1s linear infinite;
+}
+
+.rotating6 {
+    -webkit-animation: rotating1 1.5s linear infinite;
+}
+
 @-webkit-keyframes rotating1 {
     from{
         -webkit-transform: rotate(0deg);
@@ -233,6 +253,7 @@ display: none;
 .buttons {
   margin-top: -3px;
   margin-right: 5px;
+
 }
 
 .song_image_medium img {

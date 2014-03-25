@@ -14,26 +14,50 @@ $(document).ready(function() {
 
   /////////////////////
 
-  function sideA(){
+  function sideA(parsedTemplate2){
       $.ajax({
+
             url: '/deezer/get_deezer_fav_tracks.json',
             method: 'GET',
+            error: function(json){
+              $('#cog1').removeClass('rotating1');
+              $('#cog2').removeClass('rotating2');
+              var n = noty({
+                  text: 'Deezer session token has expired, please log in again to refresh',
+                  type: 'error',
+                  timeout: 2000
+                  }); // close noty
+            },
             success: function(json){
-              console.log(json);
-              _.each(json['data'], function(track){
-                  if (track.song_info.album.cover == null){
-                          var defaultCover = "http://www.rocksound.tv/images/uploads/deezer300.jpg"
-                          track.song_info.album.cover = {}
-                          track.song_info.album.cover = [{"#text":defaultCover,"size":"small"},{"#text":defaultCover,"size":"medium"},{"#text":defaultCover,"size":"large"},{"#text":defaultCover,"size":"extralarge"}];
-                    } //close image if.
-                    console.log(track);
+              $('#cog1').removeClass('rotating1');
+              $('#cog2').removeClass('rotating2');
+              
+                _.each(json['data'], function(track){
+                    if (track.song_info.album.cover == null){
+                            var defaultCover = "http://www.rocksound.tv/images/uploads/deezer300.jpg";
+                            track.song_info.album.cover = {};
+                            track.song_info.album.cover = [{"#text":defaultCover,"size":"small"},{"#text":defaultCover,"size":"medium"},{"#text":defaultCover,"size":"large"},{"#text":defaultCover,"size":"extralarge"}];
+                      } //close image if.
+                      console.log(track);
 
-                  parsedTemplate2 += songTemplate2(track);
+                    parsedTemplate2 += songTemplate2(track);
 
-              }) // close each
-             $('#similar_songs_collection').html('<h1>Side A</h1>' + parsedTemplate2);
-             parsedTemplate2 = '';
-             mouseActions(); 
+                }); // close each
+              $('#similar_songs_collection').fadeOut(function(){
+                if (parsedTemplate2 == "") {
+                $('#similar_songs_collection').html('<h1>Side A &gt;&gt; Your Favourite Tracks</h1><h2>Songs will appear here when you add them to your Deezer profile!<h2>');
+                } else { 
+                $('#similar_songs_collection').html('<h1>Side A &gt;&gt; Your Favourite Tracks</h1>' + parsedTemplate2);
+                }// close if
+                $('#similar_songs_collection').fadeIn();
+                
+                mouseActions();
+              });
+              
+             
+
+              
+              
             } // close success
           }); // close side A ajax
   };
@@ -53,16 +77,16 @@ $(document).ready(function() {
       var song_name = $('#song_song_name').val();
       var deezer_url = url;
 
-      $('#cog1').addClass('rotating1');
-      $('#cog2').addClass('rotating2');
+      $('#cog1').addClass('rotating5');
+      $('#cog2').addClass('rotating6');
 
       $.ajax({
         url: '/songs.json',
         method: 'POST',
         data: {'song[artist_name]':artist_name, 'song[song_name]':song_name, 'song[deezer_url]':deezer_url},
         error: function(json) {
-              $('#cog1').removeClass('rotating1');
-              $('#cog2').removeClass('rotating2');
+              $('#cog1').removeClass('rotating5');
+              $('#cog2').removeClass('rotating6');
               $('#similar_songs_collection').html('<h2>Sorry, song not found</h2>').focus();
             },
         success: function(data) {
@@ -70,14 +94,14 @@ $(document).ready(function() {
           $.ajax({
             url: '/songs/' + data.id + '.json',
             error: function(json) {
-                  $('#cog1').removeClass('rotating1');
-                  $('#cog2').removeClass('rotating2');
+                  $('#cog1').removeClass('rotating5');
+                  $('#cog2').removeClass('rotating6');
                   $('#similar_songs_collection').html('<h2>Sorry, no Last.fm similar song data found for this song.</h2>').focus();
                 },
 
             success: function(json) {
-                $('#cog1').removeClass('rotating1');
-                $('#cog2').removeClass('rotating2');
+                $('#cog1').removeClass('rotating5');
+                $('#cog2').removeClass('rotating6');
                 
                 _.each(json, function(track) {                    
                     if (track.image == null){
@@ -100,7 +124,7 @@ $(document).ready(function() {
                     
                     if (parsedTemplate != "") {
                         $('#similar_songs_collection').fadeOut(function(){
-                          $('#similar_songs_collection').html('<h1>Side B</h1>' + parsedTemplate);
+                          $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1>' + parsedTemplate);
                           parsedTemplate = "";
                           $('#similar_songs_collection').fadeIn();
                           
@@ -182,7 +206,10 @@ $(document).ready(function() {
     });
 
     $('#side_A_button').on('click', function(){
-      sideA();
+      $('#cog1').addClass('rotating1');
+      $('#cog2').addClass('rotating2');
+      var parsedTemplate2 = '';
+      sideA(parsedTemplate2);
     });
 
     $('.deezer_send').on('click', function(ev){
