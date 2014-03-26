@@ -2,6 +2,12 @@ $(document).ready(function() {
 
   //////// on page load
 
+  var placeholderArtist = "George Michael"
+  var placeholderSong = "Careless Whisper"
+
+  $('#song_artist_name').val(placeholderArtist);
+  $('#song_song_name').val(placeholderSong);
+
   var parsedTemplate = "";
   var parsedTemplate2 = "";
   var tmpl_similar_song = $('#tmpl_similar_song').html();
@@ -9,6 +15,11 @@ $(document).ready(function() {
 
   var songTemplate = _.template(tmpl_similar_song);
   var songTemplate2 = _.template(tmpl_fav_song);
+
+  $('input').on('focus', function(){
+    $(this).val('');
+
+  });
 
   setUp();
 
@@ -150,6 +161,10 @@ $(document).ready(function() {
   //////////////////
 
   function setUp() {
+
+    
+
+
     
     $('#side_A_button').on('click', function(){
       $(this).find('button').addClass('selected');
@@ -168,7 +183,7 @@ $(document).ready(function() {
     });
 
     $("#landing_tape").on('mouseEnter', function(){
-      
+
     })   
       
       
