@@ -12,7 +12,7 @@
   background-size: cover;
 }
 
-a:hover{
+#eject_link a:hover{
     text-decoration: none;
     background-color: none;
 }
@@ -59,7 +59,8 @@ button {
   font-size: 25px;
 }
 
-#tape_image {
+.tape_image {
+  position: relative;
   max-width: 600px;
   margin: 20px auto;
 }
@@ -212,10 +213,11 @@ display: none;
 
 #sign_in_link {
   position:absolute;
-  left:41px;
-  top:46px;
+  left:100px;
+  top:53px;
   border-radius: 5px;
   display: block;
+  z-index: 1000;
 
 }
 
@@ -234,9 +236,9 @@ display: none;
 
 #song_submit {
   position:absolute;
-  left:205px;
+  left:-10000px;
   top:325px;
-  display: none;
+  
 }
 
 #side_A_button{

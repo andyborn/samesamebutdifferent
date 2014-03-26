@@ -20,11 +20,12 @@ pre {
 
 a {
   color: #000;
+  text-decoration: none;
   &:visited {
     color: #666;
   }
   &:hover {
-    color: #fff;
+    text-decoration: underline;
     
   }
 }

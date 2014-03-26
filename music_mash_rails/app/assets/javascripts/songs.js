@@ -167,7 +167,9 @@ $(document).ready(function() {
       getSongs(ev);
     });
 
-        
+    $("#landing_tape").on('mouseEnter', function(){
+      
+    })   
       
       
   }; 
