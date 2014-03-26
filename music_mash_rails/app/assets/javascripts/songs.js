@@ -60,6 +60,7 @@ $(document).ready(function() {
                 } else { 
                 $('#similar_songs_collection').html('<h1>Side A &gt;&gt; Your Favourite Tracks</h1>' + parsedTemplate2);
                 }// close if
+                $('#down_arrows').show();
                 $('#similar_songs_collection').fadeIn();
                 
                 mouseActions();
@@ -76,6 +77,7 @@ $(document).ready(function() {
 ////////////////////
 
   $('#new_song').on('submit', function(ev){
+    $('#down_arrows').hide();
     getSongs(ev);
 
   });
@@ -91,6 +93,7 @@ $(document).ready(function() {
 
       $('#cog1').addClass('rotating5');
       $('#cog2').addClass('rotating6');
+      
 
       $.ajax({
         url: '/songs.json',
@@ -135,9 +138,11 @@ $(document).ready(function() {
                 
                     
                     if (parsedTemplate != "") {
+                        
                         $('#similar_songs_collection').fadeOut(function(){
                           $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1>' + parsedTemplate);
                           parsedTemplate = "";
+                          $('#down_arrows').show();
                           $('#similar_songs_collection').fadeIn();
                           
                           mouseActions();
@@ -146,6 +151,7 @@ $(document).ready(function() {
                         });//close fadeOut callback
           
                       } else { 
+                          $('#down_arrows').hide();
                           $('#similar_songs_collection').fadeOut(function(){ 
                           $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1></br><h2>Sorry, no Deezer data returned for this song.</h2><h2>Try checking that artist name is spelt correctly (eg. The Rolling Stones, not Rolling Stones!) </h2>');
                           $('#similar_songs_collection').fadeIn();
