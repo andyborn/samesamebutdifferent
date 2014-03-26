@@ -10,7 +10,7 @@ $(document).ready(function() {
   var songTemplate = _.template(tmpl_similar_song);
   var songTemplate2 = _.template(tmpl_fav_song);
 
-  mouseActions();
+  setUp();
 
   /////////////////////
 
@@ -66,6 +66,7 @@ $(document).ready(function() {
 
   $('#new_song').on('submit', function(ev){
     getSongs(ev);
+
   });
 
      
@@ -87,7 +88,7 @@ $(document).ready(function() {
         error: function(json) {
               $('#cog1').removeClass('rotating5');
               $('#cog2').removeClass('rotating6');
-              $('#similar_songs_collection').html('<h2>Sorry, song not found</h2>').focus();
+              $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1></br><h2>Sorry, song not found</h2>').focus();
             },
         success: function(data) {
        
@@ -96,7 +97,7 @@ $(document).ready(function() {
             error: function(json) {
                   $('#cog1').removeClass('rotating5');
                   $('#cog2').removeClass('rotating6');
-                  $('#similar_songs_collection').html('<h2>Sorry, no Last.fm similar song data found for this song.</h2>').focus();
+                  $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1></br><h2>Sorry, no Last.fm similar song data found for this song.</h2>').focus();
                 },
 
             success: function(json) {
@@ -135,7 +136,7 @@ $(document).ready(function() {
           
                       } else { 
                           $('#similar_songs_collection').fadeOut(function(){ 
-                          $('#similar_songs_collection').html('<h2>Sorry, no Deezer data returned for this song.</h2><h2>Try checking that artist name is spelt correctly (eg. The Rolling Stones, not Rolling Stones!) </h2>');
+                          $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1></br><h2>Sorry, no Deezer data returned for this song.</h2><h2>Try checking that artist name is spelt correctly (eg. The Rolling Stones, not Rolling Stones!) </h2>');
                           $('#similar_songs_collection').fadeIn();
                         }); // close fadeOut callback
                       } // close if data empty loop
@@ -148,6 +149,29 @@ $(document).ready(function() {
 
   //////////////////
 
+  function setUp() {
+    
+    $('#side_A_button').on('click', function(){
+      $(this).find('button').addClass('selected');
+      $('#side_B_button').find('button').removeClass('selected');
+      $('#cog1').addClass('rotating1');
+      $('#cog2').addClass('rotating2');
+      var parsedTemplate2 = '';
+      sideA(parsedTemplate2);
+    });
+
+    $('#side_B_button').on('click', function(ev){
+      $(this).find('button').addClass('selected');
+      $('#side_A_button').find('button').removeClass('selected');
+      console.log("click handler fires");
+      getSongs(ev);
+    });
+
+        
+      
+      
+  }; 
+  
   function mouseActions() {
     $('.similar_song').mouseenter(function(){
       $(this).find('.play_icon').show(100);
@@ -203,7 +227,10 @@ $(document).ready(function() {
         $(ev.currentTarget).parents('.similar_song').remove();
     });
 
-    $('.deezer_more').on('click', function(ev){ 
+    $('.deezer_more').on('click', function(ev){
+        $('#side_B_button').find('button').addClass('selected');
+        $('#side_A_button').find('button').removeClass('selected');
+
         var deezer_url = $(ev.currentTarget).data('deezer-url');
         var song_name = $(ev.currentTarget).data('song-name');
         var artist_name = $(ev.currentTarget).data('artist-name');
@@ -211,13 +238,6 @@ $(document).ready(function() {
         $('#song_artist_name').val(artist_name);
         $('#song_song_name').val(song_name);
         getSongs(ev, deezer_url);
-    });
-
-    $('#side_A_button').on('click', function(){
-      $('#cog1').addClass('rotating1');
-      $('#cog2').addClass('rotating2');
-      var parsedTemplate2 = '';
-      sideA(parsedTemplate2);
     });
 
     $('.deezer_send').on('click', function(ev){
@@ -255,10 +275,8 @@ $(document).ready(function() {
                 }
             }
 
-        }); //close AJAX3    
-      
+        }); //close AJAX3
       });// close button event
-  }; 
-  
+  };
 
 }); //close doc ready

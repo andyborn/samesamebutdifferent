@@ -72,10 +72,9 @@
   <h2>(a deezer.com + last.fm mashup)</h2></br>
   
   <div id="tape_container">
-    <div id="tape">
-      <%= image_tag "cassette_tape_red.png", id: "tape_image" %> 
-      <div id="sign_in_link">
-        <h1><%= link_to 'Please sign in with deezer', user_omniauth_authorize_path(:deezer) %></h1>
+    <div id="tape_image">
+     
+        <%= link_to image_tag("cassette_tape_red.png", id: "tape_image"),user_omniauth_authorize_path(:deezer) %>
       </div>
     </div>
   </div>

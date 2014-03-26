@@ -4,12 +4,19 @@
 
  body {
   padding-top: 20px;
+  padding-bottom: 60px;
   text-align: center;
   
   font-family: monaco, monospace;
   background-color: #ddd;
   background-size: cover;
 }
+
+a:hover{
+    text-decoration: none;
+    background-color: none;
+}
+
 h1, h2 {
   margin: 20px 0;
   text-decoration: bold;
@@ -28,6 +35,7 @@ h2 {
 
 button {
   border: none;
+  outline: none;
 }
 
 #titles {
@@ -46,8 +54,8 @@ button {
 }
 
 #tape_container h1, #similar_songs_collection h1 {
-  margin-bottom: 20px;
-  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
   font-size: 25px;
 }
 
@@ -66,6 +74,7 @@ input {
   font-family: monaco, monospace;
   border: none;
   border-radius: 10px;
+  outline: none;
 }
 
 #song_submit input {
@@ -213,13 +222,13 @@ display: none;
 
 #artist_input {
   position:absolute;
-  left:74px;
+  left:75px;
   top:245px;
 }
 
 #song_input {
   position:absolute;
-  left:74px;
+  left:70px;
   top:68px;
 }
 
@@ -227,22 +236,29 @@ display: none;
   position:absolute;
   left:205px;
   top:325px;
+  display: none;
 }
 
 #side_A_button{
   position: absolute;
-  left: 18px;
-  top: 321px;
-  
-  
+  left: 210px;
+  top: 326px;  
 }
 
 #side_B_button{
   position: absolute;
-  left: 510px;
-  top: 321px;
-  
-  
+  left: 315px;
+  top: 326px;  
+}
+
+#eject_link{
+  position: absolute;
+  left: 425px;
+  top: 256px;  
+}
+
+#eject_link img {
+  width: 240px;  
 }
 
 #song_submit button {
@@ -251,7 +267,7 @@ display: none;
 
 #side_A_button button, #side_B_button button {
   border-radius: 10px;
-  border: solid 2px black;
+  border: none;
   height: 50px;
   width: 80px;
   font-size: 30px;
@@ -280,6 +296,10 @@ display: none;
   background:url('http://sierrafire.cr.usgs.gov/images/loading.gif') no-repeat center center;
   height:500px;
   width:500px;
+}
+
+.selected {
+  background-color: #fd0;
 }
 
 /* media specific */

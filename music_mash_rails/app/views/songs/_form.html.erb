@@ -10,10 +10,10 @@
       <div id="cassette_cog1"><%= image_tag "cassette_cog.png", id: "cog1"%></div>
       <div id="cassette_cog2"><%= image_tag "cassette_cog.png", id: "cog2"%></div>
       <div id="song_input"> 
-        <%= f.text_field :song_name, placeholder: "track name", autofocus: true%> 
+        <%= f.text_field :song_name, placeholder: "track name", autofocus: true, autocomplete: "off"%> 
       </div>
       <div id="artist_input">
-        <%= f.text_field :artist_name, placeholder: "artist name" %>
+        <%= f.text_field :artist_name, placeholder: "artist name", autocomplete: "off" %>
       </div>
       <div id="deezer_url">
         <%= f.hidden_field :deezer_url, placeholder: "deezer url" %>
@@ -31,5 +31,7 @@
 
       <div id="side_A_button"><button>A&lt;&lt;</button></div>
       <div id="side_B_button"><button>&gt;&gt;B</button></div>
+      <div id="eject_link"><%= link_to image_tag("eject_icon.png"), destroy_user_session_path, method: :delete %>
+      </div>
  </div> 
 </div>  
