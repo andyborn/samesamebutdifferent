@@ -159,6 +159,7 @@ $(document).ready(function() {
       $(this).find('.song_dropdown').hide(100);
     });
 
+    // play songs when click on play icon
     $('.play_icon').click(function(){
       var that = $(this).parent('.similar_song').find('.song_player').get(0);
       if (that.paused == false) {
@@ -175,12 +176,19 @@ $(document).ready(function() {
         $('#cog1').removeClass('rotating3');
         $('#cog2').removeClass('rotating4');
      })   
-    // document.querySelector("audio").addEventListener("ended", alert('hey'),false);
     });
 
 
+    // prevent two songs playing at same time!
+    $("audio").on("play", function(){
+        var _this = $(this);
+        $("audio").each(function(i,el){
+            if(!$(el).is(_this))
+                $(el).get(0).pause();
+        });
+    });
 
-      // $(this).parent('.similar_song').find('.song_player').trigger("play");
+      
       
 
     $('.song_info').click(function(){

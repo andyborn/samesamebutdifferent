@@ -237,11 +237,19 @@ display: none;
   
 }
 
+#side_B_button{
+  position: absolute;
+  left: 510px;
+  top: 321px;
+  
+  
+}
+
 #song_submit button {
   border: solid 2px black;
 }
 
-#side_A_button button  {
+#side_A_button button, #side_B_button button {
   border-radius: 10px;
   border: solid 2px black;
   height: 50px;
