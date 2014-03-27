@@ -4,6 +4,7 @@ class Song < ActiveRecord::Base
 
   validate :ensure_artist_name_is_not_error 
 
+  # returns first 20 results from last.fm similar song query as json object
   def get_similar_songs
     artist_name = self.artist_name
     song_name = self.song_name
@@ -18,11 +19,7 @@ class Song < ActiveRecord::Base
     similar_songs_json
   end  
 
-  # methods to fetch last.fm song recommendations and deezer tracks matching last.fm similartracks titles.  check returned track artist name against last.fm artist name.  
-  # if they match, return first song that matches.
-
-  # need to rewrite deezer method so that it doesnt just grab last matching song... somehow break the 'if loop'
-
+  # checks user entered data against last.fm database and returns error if song missing or normalized data if it matches
   def lastfm_params_normalizer
     unless self.artist_name.blank? || self.artist_name.blank? 
       artist = self.artist_name
@@ -42,10 +39,12 @@ class Song < ActiveRecord::Base
     self.deezer_url[/\d+/] == nil
   end
 
+  # gets similar song has from last.fm using passed in params
   def similar_songs_grabber(artist, song, limit)
     HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&limit=#{limit}&autocorrect=0&api_key=d3efa10c1b792c94cbe21ae756ae44ae&format=json")
   end 
 
+  # gets additional deezer song info for a hash of last.fm similar song data, checks artist against last.fm artist to make sure it isnt a cover version
   def deezer_grabber(similar_songs_hash)
     similar_songs_hash.each do |similarsong|
       deezer_json = HTTParty.get("http://api.deezer.com/search/autocomplete?q=#{encodeURIComponent(similarsong['name'])}")
@@ -53,6 +52,7 @@ class Song < ActiveRecord::Base
     end
   end
 
+  # gets additional deezer song info for a hash of deezer favourite song data
   def deezer_track_grabber(deezer_songs_hash)
     deezer_songs_hash['data'].each do |favsong|
       get_url = "http://api.deezer.com/track/" + favsong['id']
@@ -61,6 +61,7 @@ class Song < ActiveRecord::Base
     end
   end    
 
+  # gets song info from deezer using a deezer song url link
   def deezer_url_grabber
     # gets track id from end of normal track url and appends to deezer api search url
     get_url = "http://api.deezer.com/track/" + self.deezer_url[/\d+/]
@@ -93,6 +94,7 @@ class Song < ActiveRecord::Base
         '%7E' => '~'
     )
   end
+
 
   def ensure_artist_name_is_not_error
     errors.add :artist_name, "cannot be `error`" if artist_name == 'error'

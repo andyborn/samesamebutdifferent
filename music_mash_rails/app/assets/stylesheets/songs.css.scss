@@ -299,10 +299,12 @@ display: none;
 /* media specific */
 
 @media screen and (max-width:740px) {
-  #tape_image {
+  .tape_image {
   max-width: 500px;
   margin: 20px auto;
   }
+
+
 
   #tape_container, #similar_songs_collection {
     max-width: 500px;
@@ -338,7 +340,7 @@ display: none;
 
   #song_submit {
     position:absolute;
-    left:168px;
+    left:-10000px;
     top:268px;
   }
 
@@ -385,9 +387,34 @@ display: none;
   }
 
   #side_A_button{
-    position: absolute;
-    left: 7px;
-    top: 267px;  
+    left: 168px;
+    top: 270px;  
+  }
+
+  #side_B_button{
+    left: 254px;
+    top: 270px;  
+  }
+
+  #eject_link{
+    left: 338px;
+    top: 200px;
+  }
+
+  .song_remove, .deezer_send, .deezer_more{
+  height: 35px;
+  width: 125px;
+  font-size: 17px;
+  border-radius: 10px;
+  margin-top: 8px;
+  }
+
+  .similar_song {
+  padding-left: 5px;
+  }
+
+  .play_icon {
+  left: 36px;
   }
 }
 

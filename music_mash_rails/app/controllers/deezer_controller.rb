@@ -9,7 +9,6 @@ class DeezerController < ApplicationController
       url= "https://api.deezer.com/user/#{user_id}/tracks?output=json&request_method=POST&track_id=#{deezer_id}&output=jsonp&access_token=#{session_token}"
       
       response = HTTParty.get(url)
-      # response = HTTParty.get("https://api.deezer.com/user/448706601/tracks?output=jsonp&request_method=POST&track_id=74415139&output=jsonp&access_token=froSVuFpNj532c693306a26oGnUom4w532c693306a64Wrelkxj")
       response = response[1..-2] # get rid of the brackets around the response... it should be JSON, but it's not... quite
 
       respond_to do |format|
@@ -23,6 +22,7 @@ class DeezerController < ApplicationController
 
   end 
 
+  # to do -- put this method into model, shouldnt be in controller!
   def get_deezer_fav_tracks
 
     user_id = current_user.deezer_id
@@ -45,6 +45,8 @@ class DeezerController < ApplicationController
       end
     end  
   end
+
+  # currently unused method that posts songs into a playlist in user deezer account
 
   # def post_to_deezer_playlist
     

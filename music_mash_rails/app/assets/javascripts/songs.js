@@ -2,8 +2,8 @@ $(document).ready(function() {
 
   //////// on page load
 
-  var placeholderArtist = "George Michael"
-  var placeholderSong = "Careless Whisper"
+  var placeholderArtist = "George Michael";
+  var placeholderSong = "Careless Whisper";
 
   $('#song_artist_name').val(placeholderArtist);
   $('#song_song_name').val(placeholderSong);
@@ -16,14 +16,13 @@ $(document).ready(function() {
   var songTemplate = _.template(tmpl_similar_song);
   var songTemplate2 = _.template(tmpl_fav_song);
 
-  $('input').on('focus', function(){
-    $(this).val('');
-
-  });
+ 
 
   setUp();
 
   /////////////////////
+
+  // Function to draw container of user's Deezer profile favourite tracks
 
   function sideA(parsedTemplate2){
       $.ajax({
@@ -49,7 +48,7 @@ $(document).ready(function() {
                             track.song_info.album.cover = {};
                             track.song_info.album.cover = [{"#text":defaultCover,"size":"small"},{"#text":defaultCover,"size":"medium"},{"#text":defaultCover,"size":"large"},{"#text":defaultCover,"size":"extralarge"}];
                       } //close image if.
-                      console.log(track);
+                      
 
                     parsedTemplate2 += songTemplate2(track);
 
@@ -72,17 +71,15 @@ $(document).ready(function() {
               
             } // close success
           }); // close side A ajax
-  };
+  }; //close sideA function 
 
-////////////////////
+//////////////////// 
 
-  $('#new_song').on('submit', function(ev){
-    $('#down_arrows').hide();
-    getSongs(ev);
 
-  });
 
-     
+ 
+
+  // function to draw a list of similar songs when a artist and track submitted.     
   function getSongs(ev, url) {  
       
       ev.preventDefault();
@@ -168,10 +165,6 @@ $(document).ready(function() {
 
   function setUp() {
 
-    
-
-
-    
     $('#side_A_button').on('click', function(){
       $(this).find('button').addClass('selected');
       $('#side_B_button').find('button').removeClass('selected');
@@ -186,15 +179,22 @@ $(document).ready(function() {
       $('#side_A_button').find('button').removeClass('selected');
       console.log("click handler fires");
       getSongs(ev);
-    });
-
-    $("#landing_tape").on('mouseEnter', function(){
-
-    })   
+    });  
       
-      
+    $('input').on('focus', function(){
+      $(this).val('');
+
+    }); 
+
+    $('#new_song').on('submit', function(ev){
+      $('#down_arrows').hide();
+      getSongs(ev);
+
+    }); 
   }; 
   
+  ////////////////////////////////
+
   function mouseActions() {
     $('.similar_song').mouseenter(function(){
       $(this).find('.play_icon').show(100);
@@ -207,6 +207,7 @@ $(document).ready(function() {
     });
 
     // play songs when click on play icon
+    // animates tape on and off when playing or paused
     $('.play_icon').click(function(){
       var that = $(this).parent('.similar_song').find('.song_player').get(0);
       if (that.paused == false) {
@@ -218,7 +219,7 @@ $(document).ready(function() {
             $('#cog1').addClass('rotating3');
             $('#cog2').addClass('rotating4');
         }
-
+    // stop tape animation when song ends 
      $('audio').bind('ended', function(){
         $('#cog1').removeClass('rotating3');
         $('#cog2').removeClass('rotating4');
@@ -237,7 +238,7 @@ $(document).ready(function() {
 
       
       
-
+    // click functions for phone users
     $('.song_info').click(function(){
       $(this).parent('.similar_song').find('.song_dropdown').slideToggle();
     });
@@ -246,10 +247,12 @@ $(document).ready(function() {
       $(this).parent('.similar_song').find('.song_dropdown').slideToggle();
     });
 
+    // event handler for hide button
     $('.song_remove').on('click', function(ev){ 
         $(ev.currentTarget).parents('.similar_song').remove();
     });
 
+    // event handler for find more button 
     $('.deezer_more').on('click', function(ev){
         $('#side_B_button').find('button').addClass('selected');
         $('#side_A_button').find('button').removeClass('selected');
@@ -263,6 +266,7 @@ $(document).ready(function() {
         getSongs(ev, deezer_url);
     });
 
+    // event handler for favourite button
     $('.deezer_send').on('click', function(ev){
           
         var deezer_id = $(ev.currentTarget).data('deezer-id');
@@ -300,6 +304,6 @@ $(document).ready(function() {
 
         }); //close AJAX3
       });// close button event
-  };
+  }; // close mouseActions function
 
 }); //close doc ready
