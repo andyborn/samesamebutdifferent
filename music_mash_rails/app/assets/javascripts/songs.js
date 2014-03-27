@@ -209,6 +209,19 @@ $(document).ready(function() {
     // play songs when click on play icon
     // animates tape on and off when playing or paused
     $('.play_icon').click(function(){
+
+      var $song = $(this).parent('.similar_song').find('.deezer_more');
+
+      // replace song data in tape
+      var deezer_url = $song.data('deezer-url');
+      var song_name = $song.data('song-name');
+      var artist_name = $song.data('artist-name');
+
+      $('#song_artist_name').val(artist_name);
+      $('#song_song_name').val(song_name);
+      
+
+
       var that = $(this).parent('.similar_song').find('.song_player').get(0);
       if (that.paused == false) {
             that.pause();
