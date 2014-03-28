@@ -30,16 +30,16 @@ class User < ActiveRecord::Base
           user.deezer_profile = auth.info.urls.Deezer
           user.deezer_id = auth.uid
 
-          user.deezer_playlist = User.create_deezer_playlist(user.token, user.deezer_id)
+          # user.deezer_playlist = User.create_deezer_playlist(user.token, user.deezer_id)
         end
       end
-      # binding.pry
+      
   end
 
-  def self.create_deezer_playlist(token, deezer_id)
-      response = HTTParty.get("https://api.deezer.com/user/#{deezer_id}/playlists?output=jsonp&request_method=POST&title=samesamebutdifferent&output=json&access_token=#{token}")
-      binding.pry
-      response['id']
-  end
+  # def self.create_deezer_playlist(token, deezer_id)
+  #     response = HTTParty.get("https://api.deezer.com/user/#{deezer_id}/playlists?output=jsonp&request_method=POST&title=samesamebutdifferent&output=json&access_token=#{token}")
+      
+  #     response['id']
+  # end
 
 end  

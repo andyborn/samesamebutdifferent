@@ -20,7 +20,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :last_sign_in_ip
 
       t.string :provider
-      t.string :uid
+      t.integer :uid
 
       ## Confirmable
       # t.string   :confirmation_token
