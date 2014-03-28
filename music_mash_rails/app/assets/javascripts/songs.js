@@ -5,8 +5,8 @@ $(document).ready(function() {
   var placeholderArtist = "George Michael";
   var placeholderSong = "Careless Whisper";
 
-  $('#song_artist_name').val(placeholderArtist);
-  $('#song_song_name').val(placeholderSong);
+  // $('#song_artist_name').val(placeholderArtist);
+  // $('#song_song_name').val(placeholderSong);
 
   var parsedTemplate = "";
   var parsedTemplate2 = "";
