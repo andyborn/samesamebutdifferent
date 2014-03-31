@@ -232,9 +232,11 @@ Devise.setup do |config|
 
   # ssl_options[:ca_file] = ca_file
   # , :client_options => {:ssl => {:ca_path => ssl_options}}
-  config.omniauth :deezer, '134041', '0af44f2f3ec2123c41f7d12b74ecec7a', :perms => 'manage_library,email', :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}
-
-
+  # if Rails.env.development?
+  config.omniauth :deezer, '134681', '2b3806e41b39cb457e3034a44a94e379', :perms => 'manage_library,email', :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}
+  # else  
+    # config.omniauth :deezer, '134041', '0af44f2f3ec2123c41f7d12b74ecec7a', :perms => 'manage_library,email', :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}
+  # end  
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

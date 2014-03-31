@@ -10,7 +10,7 @@ gem 'devise'
 gem 'omniauth-deezer'
 gem 'pry-rails'
 gem 'httparty'
-
+gem 'figaro'
 
 # Gems used only for assets and not required
 # in production environments by default.

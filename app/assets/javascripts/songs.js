@@ -59,8 +59,14 @@ $(document).ready(function() {
                 } else { 
                 $('#similar_songs_collection').html('<h1>Side A &gt;&gt; Your Favourite Tracks</h1>' + parsedTemplate2);
                 }// close if
-                $('#down_arrows').show();
-                $('#similar_songs_collection').fadeIn();
+                $('#down_arrows').fadeIn(function() {
+                  $('#similar_songs_collection').fadeIn(function(){
+                    $('body').scrollTo('#similar_songs_collection', 1000);
+                  });
+                  
+                });
+
+               
                 
                 mouseActions();
               });
@@ -137,13 +143,25 @@ $(document).ready(function() {
                     if (parsedTemplate != "") {
                         
                         $('#similar_songs_collection').fadeOut(function(){
+                          
                           $('#similar_songs_collection').html('<h1>Side B &gt;&gt; Recommended Tracks</h1>' + parsedTemplate);
                           parsedTemplate = "";
-                          $('#down_arrows').show();
-                          $('#similar_songs_collection').fadeIn();
+                          
+                          $('#down_arrows').fadeIn(function() {
+                            $('#similar_songs_collection').fadeIn(function(){
+                              $('body').scrollTo('#similar_songs_collection', 1000);
+                            });
+                            
+                          });
                           
                           mouseActions();
                       
+                          
+
+
+
+
+
                           
                         });//close fadeOut callback
           
@@ -187,7 +205,8 @@ $(document).ready(function() {
     }); 
 
     $('#new_song').on('submit', function(ev){
-      $('#down_arrows').hide();
+      $('#side_B_button').find('button').addClass('selected');
+      $('#side_A_button').find('button').removeClass('selected');
       getSongs(ev);
 
     }); 
@@ -273,6 +292,8 @@ $(document).ready(function() {
         var deezer_url = $(ev.currentTarget).data('deezer-url');
         var song_name = $(ev.currentTarget).data('song-name');
         var artist_name = $(ev.currentTarget).data('artist-name');
+
+        $('body').scrollTo('#titles', 1000);
 
         $('#song_artist_name').val(artist_name);
         $('#song_song_name').val(song_name);

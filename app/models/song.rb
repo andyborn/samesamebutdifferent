@@ -24,7 +24,7 @@ class Song < ActiveRecord::Base
     unless self.artist_name.blank? || self.artist_name.blank? 
       artist = self.artist_name
       song = self.song_name
-      lastfm_return = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=d3efa10c1b792c94cbe21ae756ae44ae&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&format=json")    
+      lastfm_return = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=d3efa10c1b792c94cbe21ae756ae44ae&artist=#{encodeURIComponent(artist)}&track=#{encodeURIComponent(song)}&format=json&autocorrect=1")    
       if lastfm_return['error']
         self.artist_name = "error"
         self.song_name = "error"
