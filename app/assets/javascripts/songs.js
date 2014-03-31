@@ -210,6 +210,10 @@ $(document).ready(function() {
       getSongs(ev);
 
     }); 
+
+    $('#welcome_instructions').on('click', function(){
+      $('#instructions').slideToggle(500);
+    });
   }; 
   
   ////////////////////////////////

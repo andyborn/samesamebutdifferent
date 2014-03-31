@@ -61,6 +61,12 @@
 
 <% if @current_user%>
 
+  <div id="welcome_instructions">
+    <p>Show/Hide Instructions!</br>
+      <div id="instructions"></br>Click Side A button on the player to view current favourite tracks from your Deezer profile.</br></br>  Type any track into the player and click Side B to view more track recommendations based on Last.fm user data. </br></br>Click the yellow play button to hear a 30 second track preview.</br></br>Add tracks to your Deezer profile by clicking the Favourite button.</br></br>Find more recommendations by clicking the Find More! button next to any track.</br><p>
+      </div>
+  </div>    
+
   <%= render :partial => 'form' %>
 
    <div id="down_arrows">

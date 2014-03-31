@@ -31,7 +31,7 @@
 
       <div id="side_A_button"><button>A&lt;&lt;</button></div>
       <div id="side_B_button"><button>&gt;&gt;B</button></div>
-      <div id="eject_link"><%= link_to image_tag("eject_icon.png"), destroy_user_session_path, method: :delete %>
+      <div id="eject_link"><%= link_to image_tag("eject_icon.png"), destroy_user_session_path, method: :delete, confirm: "Are you sure you want to log out?" %>
       </div>
  </div> 
 </div>  

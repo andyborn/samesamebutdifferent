@@ -47,6 +47,23 @@ button {
   background: #fd0;
 }
 
+#welcome_instructions {
+  max-width: 600px;
+  margin: 0 auto;
+  /*border: 1px solid #333;*/
+  /*border-radius: 5px;
+  padding: 20px;*/
+}
+
+#instructions {
+  display: none;
+}
+
+
+#welcome_instructions p{
+  font-family: monaco, monospace;
+}
+
 #tape_container, #similar_songs_collection {
   max-width: 600px;
   margin:  5px auto -10px;
